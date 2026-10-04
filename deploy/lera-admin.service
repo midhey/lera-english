@@ -1,0 +1,25 @@
+[Unit]
+Description=Le English — админка сайта
+After=network.target
+
+[Service]
+User=lera
+WorkingDirectory=/srv/lera
+ExecStart=/usr/bin/env node src/server.js
+Environment=PORT=3100
+Environment=SITE_URL=https://lera.midhey.ru
+# Переопределения (например, SITE_URL при переезде на свой домен) — в этом файле.
+# Пароль здесь не хранится: его задаёт src/set-password.js, на сервере лежит только хэш.
+EnvironmentFile=-/etc/lera-admin.env
+Restart=always
+RestartSec=3
+
+# Сервис пишет только контент и собранную страницу.
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/srv/lera/data /srv/lera/public
+
+[Install]
+WantedBy=multi-user.target

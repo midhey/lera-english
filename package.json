@@ -1,0 +1,13 @@
+{
+  "name": "le-english",
+  "private": true,
+  "description": "Сайт «Английский с Лерой» и мини-админка для его текстов",
+  "scripts": {
+    "dev": "node src/server.js --dev",
+    "start": "node src/server.js",
+    "build": "node src/build.js"
+  },
+  "engines": {
+    "node": ">=14.17"
+  }
+}

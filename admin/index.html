@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#F3ECE0">
+  <title>Админка — Английский с Лерой</title>
+  <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="admin.css">
+  <script src="admin.js" defer></script>
+</head>
+<body>
+  <div class="app">
+    <div class="editor">
+      <header class="top">
+        <a class="brand" href="#/"><span class="mark">Le</span>админка сайта</a>
+        <div class="top-actions">
+          <a class="site-link" href="/" target="_blank" rel="noopener">Открыть сайт ↗</a>
+          <button type="button" class="link-btn" id="logout" hidden>Выйти</button>
+        </div>
+      </header>
+      <div class="errors" id="errors" role="alert" hidden></div>
+      <main class="panel" id="panel">
+        <p class="lead">Загружаю…</p>
+      </main>
+      <div class="bar">
+        <div class="status-line">
+          <span class="status" id="status" role="status" aria-live="polite"></span>
+          <button type="button" class="link-btn" id="discard" hidden>Отменить</button>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn" id="preview">Посмотреть</button>
+          <button type="button" class="btn primary" id="publish" disabled>Опубликовать</button>
+        </div>
+      </div>
+    </div>
+    <aside class="pane" aria-label="Предпросмотр сайта">
+      <div class="pane-head">
+        <span class="pane-title">Так будет выглядеть сайт</span>
+        <div class="switch" role="group" aria-label="Размер экрана">
+          <button type="button" data-device="desktop" aria-pressed="true">Компьютер</button>
+          <button type="button" data-device="phone" aria-pressed="false">Телефон</button>
+        </div>
+      </div>
+      <div class="pane-stage" id="stage"></div>
+    </aside>
+  </div>
+</body>
+</html>

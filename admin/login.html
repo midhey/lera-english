@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#F3ECE0">
+  <title>Вход — админка сайта</title>
+  <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body class="login-page">
+  <main class="login">
+    <div class="login-brand"><span class="mark">Le</span>админка сайта</div>
+    <form class="login-card" method="post" action="/admin/login">
+      <h1 class="screen-title">Вход</h1>
+      {{message}}
+      <input type="hidden" name="next" value="{{next}}">
+      <!-- Lets password managers save the login together with a name. -->
+      <input class="visually-hidden" type="text" name="username" value="lera" autocomplete="username" tabindex="-1" aria-hidden="true">
+      <label class="label" for="password">Пароль</label>
+      <input class="input" id="password" type="password" name="password" autocomplete="current-password" required autofocus {{disabled}}>
+      <button class="btn primary" type="submit" {{disabled}}>Войти</button>
+      <p class="help">На этом устройстве вход запомнится на 30 дней.</p>
+    </form>
+  </main>
+</body>
+</html>
