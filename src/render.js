@@ -28,9 +28,12 @@ const NAV = [
 
 const SITE_NAME = 'Английский с Лерой';
 const SHARE_IMAGE = 'assets/images/social-preview.jpg';
-const FONTS = html`<link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=JetBrains+Mono:wght@400&display=swap">`;
+// Fonts are served from this site (public/assets/fonts, rules in fonts.css). The three files
+// the first screen needs — heading upright and italic, body text — start loading right away;
+// their names carry the font version, so update them together with the files.
+const PRELOAD_FONTS = ['playfair-display-cyrillic-v40', 'playfair-display-italic-500-cyrillic-v40', 'manrope-cyrillic-v20'];
+const fontLinks = (asset, root = '') => html`${PRELOAD_FONTS.map(name => html`<link rel="preload" href="${root}assets/fonts/${name}.woff2" as="font" type="font/woff2" crossorigin>
+  `)}<link rel="stylesheet" href="${root}${asset('assets/css/fonts.css')}">`;
 
 const number = index => String(index + 1).padStart(2, '0');
 const sizeAttrs = photo => (photo.width && photo.height ? html` width="${photo.width}" height="${photo.height}"` : '');
@@ -198,7 +201,7 @@ function render(content, { siteUrl, asset = path => path, preview = false }) {
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">${structuredData(content, siteUrl)}</script>
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
-  ${FONTS}
+  ${fontLinks(asset)}
   <link rel="stylesheet" href="${asset('assets/css/styles.css')}">
   <script src="${asset('assets/js/main.js')}" defer></script>
 </head>
@@ -316,10 +319,15 @@ ${!hidden.steps && html`
 <section id="reviews" class="reviews-1">
   <div class="reviews-2">
     <div class="reviews-3">
-      <h2 class="goals-4">${accent(reviews.title, 'title-accent')}</h2>
-      ${underline(200, 'M4 10 C 60 3, 130 4, 196 8', 'reviews-4')}${reviews.lead && html`
-      <p class="reviews-5">${lines(reviews.lead)}</p>`}${reviews.note && html`
-      <p class="reviews-demo-note">${lines(reviews.note)}</p>`}${reviews.sticker && html`
+      <div class="reviews-intro">
+        <div class="reviews-intro-body">
+          <h2 class="goals-4">${accent(reviews.title, 'title-accent')}</h2>
+          ${underline(200, 'M4 10 C 60 3, 130 4, 196 8', 'reviews-4')}${reviews.lead && html`
+          <p class="reviews-5">${lines(reviews.lead)}</p>`}${reviews.note && html`
+          <p class="reviews-demo-note">${lines(reviews.note)}</p>`}${reviews.cta && html`
+          <div class="desktop-only"><a ${telegram} class="reviews-cta">${reviews.cta} <span>→</span></a></div>`}
+        </div>
+      </div>${reviews.sticker && html`
       <div class="desktop-only">
         <div class="reviews-6">
           <div class="reviews-7">${lines(reviews.sticker)}</div>
@@ -327,7 +335,8 @@ ${!hidden.steps && html`
       </div>`}
     </div>
     <div class="reviews-8">${reviews.items.map(review)}
-    </div>
+    </div>${reviews.cta && html`
+    <div class="mobile-only"><a ${telegram} class="reviews-cta">${reviews.cta} <span>→</span></a></div>`}
   </div>
 </section>
 `}${!hidden.prices && html`
@@ -393,7 +402,7 @@ function renderNotFound(content, { asset = path => path }) {
   <meta name="theme-color" content="#213D32">
   <title>Страница не найдена — ${SITE_NAME}</title>
   <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
-  ${FONTS}
+  ${fontLinks(asset, '/')}
   <link rel="stylesheet" href="/${asset('assets/css/styles.css')}">
 </head>
 <body>

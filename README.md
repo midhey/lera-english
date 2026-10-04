@@ -11,7 +11,7 @@
 - `src/server.js` — сервис админки. При публикации пересобирает `public/index.html`.
 - `src/auth.js`, `src/set-password.js` — вход в админку.
 - `admin/` — страницы админки и входа.
-- `public/` — то, что отдаёт Caddy: `assets/` из репозитория, собранные `index.html`, `404.html`, `robots.txt`, `sitemap.xml` и `uploads/` с фото из админки.
+- `public/` — то, что отдаёт Caddy: `assets/` из репозитория (шрифты тоже свои, в `assets/fonts`, без Google Fonts), собранные `index.html`, `404.html`, `robots.txt`, `sitemap.xml` и `uploads/` с фото из админки.
 - `data/` — опубликованный контент, история версий (последние 100) и хэш пароля. В git не хранится.
 
 Сайт — обычная статика: если сервис админки упадёт, сайт продолжит открываться.

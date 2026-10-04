@@ -436,7 +436,7 @@ a, button, summary, [data-i] { -webkit-tap-highlight-color: rgba(33,61,50,.12); 
 .faq-icon::before, .faq-icon::after { content: ""; position: absolute; left: 0; top: 8px; width: 18px; height: 2px; border-radius: 2px; background: #B85418; transition: transform .25s ease; }
 .faq-icon::after { transform: rotate(90deg); }
 .faq-item[open]:not(.is-closing) .faq-icon::after { transform: rotate(0deg); }
-.faq-answer { display: flex; flex-direction: column; gap: 10px; padding: 0 24px 22px; }
+.faq-answer { display: flex; flex-direction: column; gap: 10px; padding: 8px 24px 24px; }
 .faq-text { margin: 0; max-width: 720px; font-size: 16px; line-height: 1.6; color: #3E4A43; }
 
 .review-initial { display: flex; align-items: center; justify-content: center; background: #F4A56E; color: #213D32; font-family: 'Playfair Display', serif; font-size: 26px; line-height: 1; }
@@ -449,7 +449,7 @@ a, button, summary, [data-i] { -webkit-tap-highlight-color: rgba(33,61,50,.12); 
  .price-card { transform: none; padding: 30px 22px 24px; min-width: 0; }
  .faq-head { margin-bottom: 28px; }
  .faq-question { padding: 18px 20px; }
- .faq-answer { padding: 0 20px 20px; }
+ .faq-answer { padding: 6px 20px 22px; }
 }
 @media (max-width: 540px) {
  .prices-grid { grid-template-columns: minmax(0, 1fr); }
@@ -489,8 +489,9 @@ a, button, summary, [data-i] { -webkit-tap-highlight-color: rgba(33,61,50,.12); 
  .steps-3 > div, .price-card { transition: translate .3s ease, box-shadow .3s ease; }
  .steps-3 > div:hover, .price-card:hover { translate: 0 -5px; box-shadow: 0 14px 28px rgba(30,43,37,.14); }
  .top-20:hover .top-21, .top-22:hover .top-24, .about-8:hover .about-9, .reviews-6:hover .reviews-7 { animation: le-wiggle .6s ease-in-out; }
- .faq-question { transition: background-color .2s ease; }
- .faq-question:hover { background-color: #F6EFE3; }
+ .faq-question { transition: background-color .2s ease; border-radius: 6px; }
+ /* Only closed questions light up: on an open one the band would glue the answer to it. */
+ .faq-item:not([open]) .faq-question:hover { background-color: #F6EFE3; }
 }
 
 .still *, .still *::before, .still *::after { animation: none !important; }
@@ -498,3 +499,26 @@ a, button, summary, [data-i] { -webkit-tap-highlight-color: rgba(33,61,50,.12); 
 
 /* Page not found */
 .notfound { min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; padding: 40px 24px 96px; text-align: center; }
+
+/* Reviews and "about" sit on the same 1200px grid as the other sections. In reviews the left
+   column is as tall as the chat: the intro sticks while a long list scrolls by, and the sticker
+   closes the column at the bottom. */
+.about-1 { max-width: 1200px; }
+.reviews-2 { max-width: 1152px; }
+.reviews-3 { align-self: stretch; }
+/* The intro takes the space above the sticker and sticks only inside it, so it never covers the sticker. */
+.reviews-intro { flex: 1 1 auto; }
+.reviews-intro-body { position: sticky; top: 40px; display: flex; flex-direction: column; gap: 20px; }
+.reviews-cta { align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; margin-top: 8px; padding: 15px 24px; border-radius: 999px; background: #FBF7F0; color: #213D32; font-weight: 600; font-size: 16px; text-decoration: none; box-shadow: 0 10px 24px rgba(0,0,0,.2); }
+.reviews-cta:hover { background: #FFFFFF; color: #213D32; }
+.mobile-only { display: none; }
+@media (max-width: 819px) {
+ .mobile-only { display: contents; }
+ .reviews-cta { width: 100%; justify-content: center; margin-top: 0; }
+}
+@media (hover: hover) and (pointer: fine) {
+ .reviews-cta { transition: translate .25s ease, background-color .2s ease; }
+ .reviews-cta:hover { translate: 0 -2px; }
+ .reviews-cta > span { transition: translate .25s ease; }
+ .reviews-cta:hover > span { translate: 4px 0; }
+}

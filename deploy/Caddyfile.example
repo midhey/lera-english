@@ -22,8 +22,9 @@ lera.midhey.ru {
 		# Страница пересобирается при каждой публикации — браузер всегда спрашивает свежую.
 		@pages path / /index.html /404.html /robots.txt /sitemap.xml
 		header @pages Cache-Control "no-cache"
-		# CSS и JS подключаются с ?v=хэш, фото из админки называются хэшем — их можно кэшировать навсегда.
-		@immutable path /assets/css/* /assets/js/* /uploads/*
+		# CSS и JS подключаются с ?v=хэш, в именах шрифтов есть версия, фото из админки называются хэшем —
+		# всё это можно кэшировать навсегда.
+		@immutable path /assets/css/* /assets/js/* /assets/fonts/* /uploads/*
 		header @immutable Cache-Control "public, max-age=31536000, immutable"
 		@images path /assets/images/*
 		header @images Cache-Control "public, max-age=604800"
