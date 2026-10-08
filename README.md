@@ -1,6 +1,6 @@
-# Английский с Лерой
+# Vallex English
 
-Одностраничный сайт и мини-админка, в которой Лера сама меняет тексты, цены, отзывы, вопросы и фото.
+Сайт https://vallexeng.ru: одностраничник и мини-админка, в которой Лера сама меняет тексты, цены, отзывы, вопросы и фото.
 Без зависимостей: Node и Caddy.
 
 ## Как устроено
@@ -42,11 +42,13 @@ npm run dev
    ```bash
    DEPLOY_HOST=root@сервер sh deploy/deploy.sh
    ```
-3. Взять блок из `deploy/Caddyfile.example` в Caddyfile и сделать `sudo systemctl reload caddy`.
-4. Проверить вход с телефона Леры: открыть https://lera.midhey.ru/admin/ из Telegram.
-5. Добавить сайт в Яндекс.Вебмастер и Google Search Console (проще всего подтвердить через DNS-запись) и отправить `https://lera.midhey.ru/sitemap.xml`.
+3. В DNS у регистратора завести A-записи `vallexeng.ru` и `www.vallexeng.ru` на IP сервера.
+4. Взять блоки из `deploy/Caddyfile.example` в Caddyfile и сделать `sudo systemctl reload caddy` — сертификат Caddy получит сам.
+5. Проверить вход с телефона Леры: открыть https://vallexeng.ru/admin/ из Telegram.
+6. Добавить сайт в Яндекс.Вебмастер и Google Search Console (проще всего подтвердить через DNS-запись) и отправить `https://vallexeng.ru/sitemap.xml`.
 
-При переезде на свой домен — поменять домен в Caddyfile и `SITE_URL` в `/etc/lera-admin.env`, затем `sudo systemctl restart lera-admin`.
+Адрес сайта для canonical, sitemap и превью ссылок — `SITE_URL` в `deploy/lera-admin.service`.
+Переопределить можно в `/etc/lera-admin.env`, затем `sudo systemctl restart lera-admin`.
 
 ## Обновление
 

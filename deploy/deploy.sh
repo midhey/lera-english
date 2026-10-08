@@ -1,7 +1,8 @@
 #!/bin/sh
 # Выкладывает код на сервер:  DEPLOY_HOST=root@1.2.3.4 sh deploy/deploy.sh
 # Контент (data/) и фото из админки (public/uploads/) на сервере не трогает.
-# Первый запуск заодно создаёт пользователя lera и systemd-сервис и спрашивает пароль админки.
+# Каждый раз обновляет systemd-сервис (свои настройки — в /etc/lera-admin.env).
+# Первый запуск заодно создаёт пользователя lera и спрашивает пароль админки.
 set -eu
 : "${DEPLOY_HOST:?Укажи DEPLOY_HOST, например root@1.2.3.4}"
 APP_DIR=/srv/lera
@@ -20,7 +21,7 @@ ssh -t "$DEPLOY_HOST" "
   \$S mkdir -p $APP_DIR/data $APP_DIR/public/uploads
   \$S cp -r $STAGE/. $APP_DIR/
   \$S chown -R lera:lera $APP_DIR
-  [ -f /etc/systemd/system/lera-admin.service ] || \$S cp $APP_DIR/deploy/lera-admin.service /etc/systemd/system/
+  \$S cp $APP_DIR/deploy/lera-admin.service /etc/systemd/system/
   \$S systemctl daemon-reload
   \$S systemctl enable --quiet lera-admin
   \$S systemctl restart lera-admin

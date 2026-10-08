@@ -1,7 +1,7 @@
 {
   "name": "le-english",
   "private": true,
-  "description": "Сайт «Английский с Лерой» и мини-админка для его текстов",
+  "description": "Сайт Vallex English (vallexeng.ru) и мини-админка для его текстов",
   "scripts": {
     "dev": "node src/server.js --dev",
     "start": "node src/server.js",

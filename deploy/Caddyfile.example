@@ -1,4 +1,4 @@
-lera.midhey.ru {
+vallexeng.ru {
 	root * /srv/lera/public
 	encode zstd gzip
 
@@ -38,4 +38,9 @@ lera.midhey.ru {
 			file_server
 		}
 	}
+}
+
+# www и старый адрес ведут на основной домен — уже разосланные ссылки не сломаются.
+www.vallexeng.ru, lera.midhey.ru {
+	redir https://vallexeng.ru{uri} permanent
 }

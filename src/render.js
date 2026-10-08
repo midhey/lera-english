@@ -26,7 +26,7 @@ const NAV = [
   { id: 'faq', label: 'Вопросы' },
 ];
 
-const SITE_NAME = 'Английский с Лерой';
+const SITE_NAME = 'Vallex English';
 const SHARE_IMAGE = 'assets/images/social-preview.jpg';
 // Fonts are served from this site (public/assets/fonts, rules in fonts.css). The three files
 // the first screen needs — heading upright and italic, body text — start loading right away;
@@ -119,19 +119,21 @@ function structuredData(content, siteUrl) {
   const url = `${siteUrl}/`;
   const contact = content.contacts.telegram ? [content.contacts.telegram] : undefined;
   const graph = [
-    { '@type': 'WebSite', '@id': `${url}#site`, url, name: SITE_NAME, inLanguage: 'ru-RU' },
+    { '@type': 'WebSite', '@id': `${url}#site`, url, name: SITE_NAME, alternateName: 'Vallex', inLanguage: 'ru-RU' },
     {
       '@type': 'Service',
       '@id': `${url}#service`,
       name: content.seo.title,
       description: content.seo.description,
       serviceType: 'Индивидуальные онлайн-занятия английским языком',
+      brand: { '@type': 'Brand', name: SITE_NAME },
       url,
       image: `${siteUrl}/${SHARE_IMAGE}`,
       availableChannel: contact && { '@type': 'ServiceChannel', serviceUrl: contact[0] },
       provider: {
         '@type': 'Person',
-        name: 'Лера',
+        name: 'Валерия',
+        alternateName: 'Лера',
         jobTitle: 'Репетитор английского языка',
         image: content.hero.photo ? `${siteUrl}/${content.hero.photo.src}` : undefined,
         sameAs: contact,
@@ -197,7 +199,7 @@ function render(content, { siteUrl, asset = path => path, preview = false }) {
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1122">
   <meta property="og:image:height" content="1402">
-  <meta property="og:image:alt" content="Лера — преподаватель английского языка">
+  <meta property="og:image:alt" content="Валерия — преподаватель Vallex English">
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">${structuredData(content, siteUrl)}</script>
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">

@@ -10,7 +10,7 @@ const ROOT = path.join(__dirname, '..');
 // On the server the content and uploads live outside the deployed code and survive redeploys.
 const SITE_DIR = path.resolve(process.env.SITE_DIR || path.join(ROOT, 'public'));
 const DATA_DIR = path.resolve(process.env.DATA_DIR || path.join(ROOT, 'data'));
-const SITE_URL = (process.env.SITE_URL || 'https://lera.midhey.ru').replace(/\/+$/, '');
+const SITE_URL = (process.env.SITE_URL || 'https://vallexeng.ru').replace(/\/+$/, '');
 const HISTORY_DIR = path.join(DATA_DIR, 'history');
 const CURRENT_FILE = path.join(DATA_DIR, 'content.json');
 const HISTORY_LIMIT = 100;

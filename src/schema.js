@@ -34,7 +34,7 @@ const sections = [
     summary: { text: 'contacts.telegram' },
     groups: [
       group('contacts', 'Контакты', [
-        { type: 'telegram', key: 'telegram', label: 'Ник или ссылка в Telegram', help: 'Например, @lera_english или t.me/lera_english.' },
+        { type: 'telegram', key: 'telegram', label: 'Ник или ссылка в Telegram', help: 'Например, @vallex_english или t.me/vallex_english.' },
       ]),
     ],
   },
@@ -348,7 +348,7 @@ function clean(spec, value, trail, ctx) {
     case 'telegram': {
       const username = telegramUsername(cleanText({}, value));
       if (!username) {
-        ctx.errors.push(`${where}: нужен ник вроде @lera_english или ссылка t.me/…`);
+        ctx.errors.push(`${where}: нужен ник вроде @vallex_english или ссылка t.me/…`);
         return '';
       }
       return `https://t.me/${username}`;

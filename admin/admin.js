@@ -187,7 +187,7 @@ function check(spec, path, trail, sectionId, problems) {
   } else if (spec.type === 'image') {
     if (!value && !spec.optional) add('нужно фото');
   } else if (spec.type === 'telegram') {
-    if (!TELEGRAM.test(String(value || '').trim())) add('нужен ник вроде @lera_english или ссылка t.me/…');
+    if (!TELEGRAM.test(String(value || '').trim())) add('нужен ник вроде @vallex_english или ссылка t.me/…');
   } else {
     const text = String(value || '').trim();
     if (spec.required && !text) add('заполни поле');
@@ -310,7 +310,7 @@ function renderText(spec, path) {
 }
 
 function renderTelegram(spec, path) {
-  const node = renderText(Object.assign({}, spec, { max: 80, placeholder: '@lera_english' }), path);
+  const node = renderText(Object.assign({}, spec, { max: 80, placeholder: '@vallex_english' }), path);
   const input = node.querySelector('input');
   const hint = el('div', { class: 'hint' });
   const check = () => {
@@ -320,7 +320,7 @@ function renderTelegram(spec, path) {
     if (match) {
       hint.append('Кнопки ведут на ', el('a', { href: `https://t.me/${match[1]}`, target: '_blank', rel: 'noopener', text: `t.me/${match[1]} ↗` }));
     } else {
-      hint.textContent = 'Нужен ник вроде @lera_english или ссылка t.me/…';
+      hint.textContent = 'Нужен ник вроде @vallex_english или ссылка t.me/…';
     }
   };
   input.addEventListener('input', check);
@@ -667,7 +667,7 @@ function renderSeoMockup() {
       el(
         'div',
         { class: 'share' },
-        el('div', { class: 'share-site', text: 'Английский с Лерой' }),
+        el('div', { class: 'share-site', text: 'Vallex English' }),
         el('div', { class: 'share-title', text: seo.shareTitle }),
         el('div', { class: 'share-text', text: seo.shareDescription }),
         el('img', { src: '/assets/images/social-preview.jpg', alt: '' })
@@ -754,12 +754,12 @@ function render() {
   homeLink.textContent = '';
   if (current.screen === 'home') {
     homeLink.className = 'brand';
-    homeLink.append(el('span', { class: 'mark', text: 'Le' }), 'админка сайта');
+    homeLink.append(el('span', { class: 'mark', text: 'Ve' }), 'админка сайта');
   } else {
     homeLink.className = 'brand back';
     homeLink.textContent = '‹ Все разделы';
   }
-  document.title = current.screen === 'section' ? `${current.section.title} — админка` : 'Админка — Английский с Лерой';
+  document.title = current.screen === 'section' ? `${current.section.title} — админка` : 'Админка — Vallex English';
   updateBar();
   focusPreview(current.anchor, current.screen === 'section');
   if (afterRender) {
